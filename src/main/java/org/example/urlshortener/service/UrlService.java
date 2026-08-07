@@ -1,6 +1,6 @@
 package org.example.urlshortener.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.urlshortener.entity.UrlMapping;
 import org.example.urlshortener.exception.UrlNotFoundException;
 import org.example.urlshortener.repository.UrlRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UrlService {
     private final Base62Service base62Service;
     private final UrlRepository urlRepository;
