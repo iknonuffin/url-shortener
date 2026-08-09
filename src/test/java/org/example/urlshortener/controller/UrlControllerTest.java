@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.endsWith;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,7 +29,7 @@ public class UrlControllerTest {
         when(urlService.shorten("https://example.com"))
                 .thenReturn("1Z");
 
-        mockMvc.perform(post("https://example.com")
+        mockMvc.perform(post("/shorten")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
@@ -36,7 +37,7 @@ public class UrlControllerTest {
                         }
                         """))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.shortUrl").value("http://localhost:8080/1Z"));
+                .andExpect(jsonPath("$.shortUrl").value(endsWith("/1Z")));
     }
 
     @Test

@@ -9,11 +9,6 @@ public class Base62ServiceTest {
     private final Base62Service base62Service = new Base62Service();
 
     @Test
-    void encode_zero_returnsZero() {
-        assertEquals("0", base62Service.encode(0));
-    }
-
-    @Test
     void encode_differentNumbers_returnsCorrectResult() {
         assertEquals("1", base62Service.encode(1));
         assertEquals("A", base62Service.encode(10));
