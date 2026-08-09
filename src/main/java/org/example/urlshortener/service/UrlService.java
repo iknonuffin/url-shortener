@@ -14,16 +14,14 @@ public class UrlService {
     private final UrlRepository urlRepository;
 
     @Transactional
-    public UrlMapping shorten(String url) {
-        UrlMapping urlMapping = new UrlMapping(url);
+    public String shorten(String url) {
+        UrlMapping urlMapping = urlRepository.save(new UrlMapping(url));
 
-        urlRepository.save(urlMapping);
+        String shortCode = base62Service.encode(urlMapping.getId());
 
-        urlMapping.setShortCode(
-                base62Service.encode(urlMapping.getId())
-        );
+        urlMapping.setShortCode(shortCode);
 
-        return urlMapping;
+        return shortCode;
     }
 
     public String getOriginalUrl(String shortCode) {
